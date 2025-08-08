@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -26,8 +27,15 @@ namespace Ejercicio1.Models
 
         public string Describir()
         {
-            string mensaje = $@"ancho: {ancho} Largo:{largo}";
-            return mensaje;
+            var culture = CultureInfo.InvariantCulture;
+
+
+            return $@"{{
+            ""Tipo"": ""Rectangulo"",
+            ""Ancho"": {ancho.ToString("f2",culture)},
+            ""Largo"":{largo.ToString("f2",culture)},
+            ""Area"" : {CalcularArea().ToString("f2",culture)}
+            }}";
         }
     }
 }

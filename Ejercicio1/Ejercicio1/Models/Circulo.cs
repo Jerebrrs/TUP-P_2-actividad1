@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,9 @@ namespace Ejercicio1.Models
 
         public Circulo(double radio)
         {
-           this.radio = radio;
+            this.radio = radio;
         }
+          
 
         public double CalcularArea()
         {
@@ -23,7 +25,13 @@ namespace Ejercicio1.Models
 
         public string Describir()
         {
-            return "Soy un rectangulo";
+            var culture = CultureInfo.InvariantCulture;
+
+            return $@"{{
+                ""Tipo"" : ""Circulo""
+                ""Radio"" : {radio.ToString("f2",culture)},
+                ""Area"" : {CalcularArea().ToString("f2",culture)}
+             }}";
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Text;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
@@ -43,8 +44,27 @@ namespace Ejercicio1.Models
 
         public string Desribir()
         {
-            string mensaje = $@"soy un ortoegro {bases[0].Describir()}";
-            return mensaje;
+            var culture = CultureInfo.InvariantCulture;
+
+            string lateralesDesc = "";
+            for (int i = 0; i < 3; i++)
+            {
+                lateralesDesc += laterales[i].Describir() + " \n";
+            }
+            lateralesDesc += laterales[3].Describir();
+            return $@"{{
+            ""Tipo"" : ""Ortoedro"",
+                ""Tapas"" :
+                [
+                 {bases[0].Describir()}
+                 {bases[1].Describir()}
+                ],
+                ""Laterales"": [
+                {lateralesDesc}
+                ],
+                ""Area"": {CalcularArea().ToString("f2",culture)},
+                ""Volumen"": {CalcularVolumen().ToString("f2",culture)}
+            }}";
         }
 
     }
